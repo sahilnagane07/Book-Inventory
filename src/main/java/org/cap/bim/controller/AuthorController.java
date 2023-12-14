@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthorController 
 {
-	@Autowired
+	@Autowired  
 	private IAuthorService authorService;
 	@PostMapping("/post")
 	public ResponseEntity<String> addAuthor(@RequestBody Author author){
