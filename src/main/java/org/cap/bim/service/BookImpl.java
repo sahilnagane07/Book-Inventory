@@ -49,14 +49,27 @@ public class BookImpl implements IBookService
 //		
 //		
 //		book.setCatId(category.get().getCatId());
+		
+		if(book.getIsbn()==null || book.getIsbn().isEmpty())
+		{
+			throw new BookNotFoundException("Please Enter ISBN") ;
+
+		   
+		}
 		return bookRepository.save(book);
+		
+		
+		
 		
 	}
 
 	@Override
 	public List<Book> getAllBooks() 
 	{
-		return bookRepository.findAll();
+		List<Book> books=bookRepository.findAll();
+		
+	
+		return books;
 		
 	}
 
@@ -229,6 +242,18 @@ public class BookImpl implements IBookService
 		}
 				
         throw new BookNotFoundException("Book Not Found");
+	}
+
+	@Override
+	public List<Object[]> getBookDetails(String isbn) {
+		List<Object[]> bookdetails=bookRepository.findBookDetailsByIsbn(isbn);
+		
+		if(bookdetails!=null)
+		{
+			return bookdetails;
+		}
+        throw new BookNotFoundException("Book Not Found");
+
 	}
 	
 	

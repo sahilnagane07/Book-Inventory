@@ -18,6 +18,9 @@ import org.cap.bim.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
+
+@Transactional
 @Service
 public class ShoppingCartImpl implements IShoppingCartService{
 
@@ -31,14 +34,18 @@ public class ShoppingCartImpl implements IShoppingCartService{
 	private BookRepository bookRepository;
 	
 	@Override
-	public ShoppingCart addToCart(ShoppingCartDTO shoppingCartDto) {
+	public ShoppingCart addToCart(ShoppingCartDTO shoppingCartDto) 
+	{
+		System.out.println("isb in service***********"+shoppingCartDto.getIsbn());
+		System.out.println("isb***********"+shoppingCartDto.getUserId());
+
 		Optional<User> user=userRepository.findById(shoppingCartDto.getUserId());
 		if(user.isEmpty()) {
 			throw new UserNotFoundException("User not found with this userId!"); 
 		}
 		ShoppingCart shoppingCart=new ShoppingCart();
-		//shoppingCart.setUserId(user.get().getUserId());
 		shoppingCart.setISBN(shoppingCartDto.getIsbn());
+		System.out.println("isbn:-"+shoppingCart.getISBN());
 		shoppingCart.setUserId(shoppingCartDto.getUserId());
 		ShoppingCart shoppingCart1=shoppingCartRepository.save(shoppingCart);
 		if(shoppingCart1!=null) {
@@ -83,6 +90,21 @@ public class ShoppingCartImpl implements IShoppingCartService{
 			cartDTOs.add(dto);
 		}
 		return cartDTOs;
+	}
+
+	@Override
+	public List<Object[]> getUsercartData(Integer userId)
+	{
+		List<Object[]> title=shoppingCartRepository.getUserShoppingData(userId);
+		return title;
+	}
+
+	
+	@Override
+	public void deleteItemFromcart(String Isbn) 
+	{
+		shoppingCartRepository.deleteByISBN(Isbn);
+		
 	}
 
 }

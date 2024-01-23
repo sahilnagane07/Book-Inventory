@@ -2,6 +2,7 @@ package org.cap.bim.servicetest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
@@ -46,40 +47,40 @@ public class BookTest
 	}
 	
 	
-	@Test
-    public void testCreatebookData() 
-	{
-        Book book = new Book();
-        book.setTitle("Sample Book");
-        book.setPublisherId(100); 
-        book.setCatId(13);  
-        
-        when(bookRepository.save(book)).thenReturn(book);
-        
-        Book book2=bookImpl.createbookData(book);
+	 @Test
+	    public void testCreateBookData_Successful() {
+	        // Arrange
+	        Book inputBook = new Book();
+	        inputBook.setIsbn("1234567890");
 
-        assertEquals(book2, book);
-    }
-	
+	        // Mocking behavior
+	        when(bookRepository.save(any(Book.class))).thenReturn(inputBook);
+
+	        // Act
+	        Book result = bookImpl.createbookData(inputBook);
+
+	        // Assert
+	        assertEquals(inputBook.getIsbn(), result.getIsbn());
+
+	        
+	    }
 	
 	 @Test
-	    public void testGetAllBooks() {
-	        // Prepare test data
+	    public void testGetAllBooks_Successful() {
+	        // Arrange
 	        Book book1 = new Book();
-	        book1.setTitle("Book 1");
-
 	        Book book2 = new Book();
-	        book2.setTitle("Book 2");
-
 	        List<Book> mockBooks = Arrays.asList(book1, book2);
 
 	        when(bookRepository.findAll()).thenReturn(mockBooks);
 
 	        List<Book> result = bookImpl.getAllBooks();
 
+	        assertEquals(2, result.size());
 
-	       assertEquals(result, mockBooks);
 	    }
+
+
 	 
 	 
 

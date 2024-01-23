@@ -13,4 +13,6 @@ public interface IAuthorService
 	public Author updateFirstNameById(Integer authorId,Author author);
 	public Author updateLastNameById(Integer authorId,Author author);
 	public List<Book> getAllBooks(Integer authorId);
+	
+	public List<Author> getAllAuthors();
 }

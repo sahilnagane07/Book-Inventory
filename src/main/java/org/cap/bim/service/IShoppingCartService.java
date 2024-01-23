@@ -9,4 +9,8 @@ public interface IShoppingCartService {
 	public ShoppingCart addToCart(ShoppingCartDTO shoppingCartDto);
 	public List<ShoppingCartDTO> getCartByUserId(Integer userId);
 	public List<ShoppingCartDTO> updateISBNByUserId(Integer userId,ShoppingCartDTO shoppingCartDto);
+	
+	public List<Object[]> getUsercartData(Integer userId);
+	
+	void deleteItemFromcart(String Isbn);
 }

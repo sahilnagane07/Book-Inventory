@@ -81,4 +81,16 @@ public class PurchaseLogImpl implements IPurchaseLogService{
 	    }
 	    return purchaseLogDTOs;
 	}
+
+	@Override
+	public List<Object[]> getPurchaseDetailsByUser(Integer userId) 
+	{
+		List<Object[]> purchasedetails=purchaseLogRepository.getPurchaseHistoryDetailsByuserId(userId);
+		if(purchasedetails!=null)
+		{
+			return purchasedetails;
+		}
+        throw new PurchaseLogNotFoundException("PurchaseHistory Not Present");
+
+	}
 }

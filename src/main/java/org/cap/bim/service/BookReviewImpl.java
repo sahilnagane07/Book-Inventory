@@ -23,8 +23,8 @@ public class BookReviewImpl implements IBookReviewService
 	public BookReview addBookReview(BookReview bookReview)
 	
 	{
-//		bookReview.setIsbn(bookReview.getIsbn());	
-//		bookReview.setReviewerId(bookReview.getReviewerId());
+//		if(bookReview.getIsbn()==null || bookReview.getIsbnn  ().isEmpty() || bookReview.getReviewerId()<0)
+
 		return bookReviewRepository.save(bookReview);
 	}
 

@@ -1,5 +1,6 @@
 package org.cap.bim.service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -34,7 +35,10 @@ public class InventoryImpl implements IInventoryService
 	{
 		Optional<Book> book=bookRepository.findById(inventory.getIsbn());
 		
-		System.out.println("Ranks is"+inventory.getRanks());
+		if(book.isEmpty())
+		{
+			throw new BookNotFoundException("Given Book is not present in Book List");
+		}
 		
 		     inventory.setIsbn(book.get().getIsbn());
 		     inventory.setRanks(inventory.getRanks());
@@ -66,7 +70,33 @@ public class InventoryImpl implements IInventoryService
 	    	  inventoryRepository.save(inventory1.get());
 		    	return inventory1.get();
 		    }
-			throw new InventoryNotFoundException(" InventoryId id not found");
+		return inventory;
+	}
+
+	@Override
+	public List<Inventory> getInventoryData() 
+	{
+		List<Inventory> inventories=inventoryRepository.GetinventoriesAvailable();
+		if(inventories!=null)
+		{
+			return inventories;
+		}
+		
+		throw new InventoryNotFoundException(" Inventory is empty");
+
+		
+	}
+
+	@Override
+	public List<Inventory> getAvailableInventoryData() {
+		List<Inventory> inventories=inventoryRepository.findAll();
+		if(inventories!=null)
+		{
+			return inventories;
+		}
+		
+		throw new InventoryNotFoundException(" Inventory is empty");
+
 	}
 
 }

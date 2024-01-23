@@ -23,5 +23,7 @@ public interface IBookService
 	public Book updateBookedition(String isbn,Book book);
 	public Book udpdateBookPublisher(String isbn,Book book);
 	
+	public List<Object[]> getBookDetails(String isbn);
+	
 
 }

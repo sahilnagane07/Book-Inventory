@@ -27,7 +27,7 @@ public class ShoppingCart
 	
 	
 	@ManyToOne
-	@JsonBackReference
+	//@JsonBackReference
 	@JoinColumn(name="ISBN",referencedColumnName = "ISBN",insertable = false,updatable = false)
 	private Book book;
 	
@@ -38,13 +38,13 @@ public class ShoppingCart
 	public ShoppingCart(int userId, String iSBN) {
 		super();
 		this.userId = userId;
-		ISBN = iSBN;
+		this.ISBN = iSBN;
 	}
 
 	public ShoppingCart(int userId, String iSBN, Book book) {
 		super();
 		this.userId = userId;
-		ISBN = iSBN;
+		this.ISBN = iSBN;
 		this.book = book;
 	}
 
@@ -65,7 +65,7 @@ public class ShoppingCart
 
 
 	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+		this.ISBN = iSBN;
 	}
 
 

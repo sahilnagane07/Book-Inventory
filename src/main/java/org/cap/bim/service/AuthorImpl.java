@@ -118,4 +118,9 @@ public class AuthorImpl implements IAuthorService
 		}
 		return booksByAuthor;
 	}
+
+	@Override
+	public List<Author> getAllAuthors() {
+		// TODO Auto-generated method stub
+		return authorRepository.findAll();	}
 }

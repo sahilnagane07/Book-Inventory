@@ -3,7 +3,8 @@ package org.cap.bim.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class ShoppingCartKey implements Serializable {
+public class ShoppingCartKey implements Serializable 
+{
 	private int userId;
 	private String ISBN;
 	
@@ -14,7 +15,7 @@ public class ShoppingCartKey implements Serializable {
 	public ShoppingCartKey(int userId, String iSBN) {
 		super();
 		this.userId = userId;
-		ISBN = iSBN;
+		this.ISBN = iSBN;
 	}
 
 	public int getUserId() {
@@ -30,13 +31,13 @@ public class ShoppingCartKey implements Serializable {
 	}
 
 	public void setISBN(String iSBN) {
-		ISBN = iSBN;
+		this.ISBN = iSBN;
 	}
 
-	@Override
-	public String toString() {
-		return "ShoppingCartKey [userId=" + userId + ", ISBN=" + ISBN + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "ShoppingCartKey [userId=" + userId + ", ISBN=" + ISBN + "]";
+//	}
 
 	@Override
 	public int hashCode() {

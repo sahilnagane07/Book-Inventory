@@ -1,5 +1,6 @@
 package org.cap.bim.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.cap.bim.exception.BookNotFoundException;
@@ -74,6 +75,17 @@ public class BookConditionImpl implements IBookConditionService{
 		}
 		throw new BookNotFoundException("Book Not found For Updation");
 
+	}
+
+	@Override
+	public List<BookCondition> getAllBookConditionlist() 
+	{
+		List<BookCondition> bookConditions=bookConditionRepository.findAll();
+		if(bookConditions!=null)
+		{
+			return bookConditions;
+		}
+		return null;
 	}
 	
 

@@ -50,19 +50,18 @@ public class Book
 	
 	@ManyToOne
 	@JoinColumn(name="Category",referencedColumnName = "CatID",insertable = false,updatable =   false)
-	@JsonBackReference
 	private Category category;
 	
 	
     @ManyToOne
 	@JoinColumn(name="PublisherID",referencedColumnName = "PublisherID",insertable = false,updatable = false)
-	@JsonBackReference
+    //@JsonBackReference
     private Publisher publisher;
     
     
     @JsonIgnore
     @OneToMany(mappedBy = "book")
-    @JsonManagedReference
+   // @JsonBackReference
    private  List<BookReview> bookReviews=new ArrayList<>();
     
     

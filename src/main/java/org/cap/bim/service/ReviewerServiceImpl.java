@@ -1,4 +1,5 @@
 package org.cap.bim.service;
+import java.util.List;
 import java.util.Optional;
 
 import org.cap.bim.exception.ReviewerNotFoundException;
@@ -17,6 +18,8 @@ public class ReviewerServiceImpl implements IReviewerService{
 
 	@Override
 	public Reviewer addReviewer(Reviewer reviewer) {
+		
+	
 	return reviewerRepository.save(reviewer);
 	}
 	
@@ -56,6 +59,11 @@ public class ReviewerServiceImpl implements IReviewerService{
 			throw new ReviewerNotFoundException("Reviewer with ID "+ reviewerId +" is not found");
 		 
 		
+	}
+
+	@Override
+	public List<Reviewer> getAllReviwers() {
+		return reviewerRepository.findAll();
 	}
 
 }

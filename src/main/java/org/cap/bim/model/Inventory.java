@@ -37,12 +37,12 @@ public class Inventory {
 	
 	@ManyToOne
 	@JoinColumn(name = "Ranks",referencedColumnName = "Ranks",insertable = false,updatable = false)
-	@JsonBackReference
+	//@JsonBackReference
 	private  BookCondition bookcondition;
 	
 	@ManyToOne
 	@JoinColumn(name = "ISBN",referencedColumnName = "ISBN",insertable = false,updatable = false)
-	@JsonBackReference
+	//@JsonBackReference
 	private Book book;
 
 	public Inventory() {

@@ -8,4 +8,9 @@ public interface IUserService {
 	public User updateFirstNameById(Integer userId, User user);
 	public User updateLastNameById(Integer userId,User user);
 	public User updatePhoneNumberById(Integer userId,User user);
+	public User userLogin(String userName,String password);
+	
+	public User updateUserdetails(Integer userId,User user);
+	
+	
 }

@@ -9,4 +9,8 @@ public interface IPurchaseLogService {
 	public PurchaseLog addPurchaseLog(PurchaseLogDTO purchaseLogDto);
 	public List<PurchaseLogDTO> getPurchaseLogByUserId(Integer userId);
 	public List<PurchaseLogDTO> updateInventoryIdByUserId(Integer userId,PurchaseLogDTO purchaseLogDto);
+	
+	
+	
+	public List<Object[]> getPurchaseDetailsByUser(Integer userId);
 }

@@ -31,7 +31,7 @@ public class Category
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "category")
-	@JsonManagedReference
+	//@JsonManagedReference
 	List<Book> Books=new ArrayList<>();
 	
 	public Category() {

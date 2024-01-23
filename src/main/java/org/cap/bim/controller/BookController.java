@@ -1,13 +1,13 @@
 package org.cap.bim.controller;
 
 import java.util.List;
-
 import org.cap.bim.model.Book;
 import org.cap.bim.model.BookDto;
 import org.cap.bim.service.IBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api")
 @RestController
 public class BookController 
@@ -38,7 +40,7 @@ public class BookController
 		
 		if(book1!=null)
 		{
-			return new ResponseEntity("Book Added Successfully", HttpStatus.CREATED);
+			return new ResponseEntity("Book Added Successfully", HttpStatus.OK);
 		}
 		return new ResponseEntity("Book Object creation Error!",HttpStatus.BAD_REQUEST);
 		
@@ -49,7 +51,7 @@ public class BookController
 
 	@GetMapping("/books")
 	public ResponseEntity<List<Book>> getAllBooks()
-	{
+	{ 
 		List<Book> books= bookService.getAllBooks();
 		if(books!=null)
 		{
@@ -68,6 +70,18 @@ public class BookController
 					HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Book>(book, HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/bookdetails/{isbn}")
+	public ResponseEntity<List<Object[]>> getBookDetails(@PathVariable("isbn")String isbn){
+		List<Object[]> bookDetails=bookService.getBookDetails(isbn);
+		
+		if(bookDetails==null) {
+			return new ResponseEntity("Sorry! book is not present:" + isbn+" Not Found!",
+					HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Object[]>>(bookDetails, HttpStatus.OK);
 
 	}
 	

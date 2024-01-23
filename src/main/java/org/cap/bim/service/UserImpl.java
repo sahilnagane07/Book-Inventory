@@ -66,4 +66,36 @@ public class UserImpl implements IUserService{
 		throw new UserNotFoundException("User with ID "+ userId +" is not found");
 	}
 
+	@Override
+	public User userLogin(String userName, String password) {
+		User user=userRepository.validateCredentials(userName, password);
+		if(user==null) {
+			throw new UserNotFoundException("Wrong credentials");
+		}
+		return user;
+	}
+
+	@Override
+	public User updateUserdetails(Integer userId,User user) 
+	{
+		Optional<User> optionalUser=userRepository.findById(userId);
+		if(optionalUser.isPresent()) 
+		{
+			User user1=optionalUser.get();
+			user1.setFirstName(user.getFirstName());
+			user1.setLastName(user.getLastName());
+			user1.setPhoneNumber(user.getPhoneNumber());
+			user1.setUserName(user.getUserName());
+			userRepository.save(user1);
+			return user1;
+
+			
+			
+		}
+		throw new UserNotFoundException("User with ID "+ userId +" is not found");
+
+		
+		
+	}
+
 }

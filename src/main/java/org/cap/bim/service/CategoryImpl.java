@@ -1,5 +1,7 @@
 package org.cap.bim.service;
 
+import java.util.List;
+
 import org.cap.bim.exception.BookNotFoundException;
 
 import org.cap.bim.exception.CategoryNotFoundException;
@@ -44,6 +46,11 @@ public class CategoryImpl implements ICategoryService
 		
 		return category;
 		
+	}
+	
+	@Override
+	public List<Category> getAllCategory() {
+		return categoryRepository.findAll();
 	}
 		
 }

@@ -1,5 +1,8 @@
 package org.cap.bim.controller;
 
+import java.util.List;
+
+import org.cap.bim.model.Book;
 import org.cap.bim.model.Inventory;
 import org.cap.bim.model.InventoryDto;
 import org.cap.bim.model.State;
@@ -7,6 +10,7 @@ import org.cap.bim.service.IInventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/bookinventory")
 @RestController
 public class InventoryController
@@ -35,12 +40,36 @@ public class InventoryController
 	
 		if (inventory1!=null)
 		{
-			return new ResponseEntity("Book inventory added successfully", HttpStatus.CREATED);
+			return new ResponseEntity("Book inventory added successfully", HttpStatus.OK);
 
 		}
 		return new ResponseEntity("Book Inventory Object creation Error!",
 				HttpStatus.BAD_REQUEST);
 		
+	}
+	
+	
+	
+	@GetMapping
+	public ResponseEntity<List<Inventory>> getAllBooks()
+	{
+		List<Inventory> inventory= iInventoryService.getInventoryData();
+		if(inventory!=null)
+		{
+			return new ResponseEntity<List<Inventory>>(inventory,HttpStatus.OK);
+		}
+		return new ResponseEntity("Empty ",HttpStatus.BAD_REQUEST);
+	}
+	
+	@GetMapping("/availableinventory")
+	public ResponseEntity<List<Inventory>> getAvailableInventoryData()
+	{
+		List<Inventory> inventory= iInventoryService.getAvailableInventoryData();
+		if(inventory!=null)
+		{
+			return new ResponseEntity<List<Inventory>>(inventory,HttpStatus.OK);
+		}
+		return new ResponseEntity("Empty ",HttpStatus.BAD_REQUEST);
 	}
 	
 	

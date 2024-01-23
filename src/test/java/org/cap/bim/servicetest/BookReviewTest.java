@@ -45,7 +45,6 @@ public class BookReviewTest
     public void testAddBookReview() {
         BookReview mockBookReview = new BookReview();
 
-//        Mockito.when?(bookReviewRepository.save(Mockito.any(BookReview.class))).thenReturn(mockBookReview);
         when(bookReviewRepository.save(any())).thenReturn(mockBookReview);
 
         BookReview result = bookReviewImpl.addBookReview(mockBookReview);
